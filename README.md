@@ -1,10 +1,5 @@
-# Spring-Boilerplate
-Sample Spring Boilerplate
+# Oauth with google
 
+# GOOGLE OAUTH
 
-Uses
-- Zuul Gateway
-- Eureka server
-- Config server
-- Microservice
-- Webapplication
+Google oauth implementation, and api authentication enabled at spring cloud gateway.
