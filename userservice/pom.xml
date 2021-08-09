@@ -26,6 +26,10 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -84,6 +88,8 @@
 				<version>2.5.2</version>
 			</plugin>
 		</plugins>
+		<finalName>userservice</finalName>
+
 	</build>
 	<repositories>
 		<repository>

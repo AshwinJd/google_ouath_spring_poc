@@ -1,6 +1,7 @@
 package com.stackroute.userservice.authentication;
 
 
+import com.stackroute.userservice.users.UserService;
 import com.stackroute.userservice.users.Users;
 import com.stackroute.userservice.util.CookieUtil;
 import com.stackroute.userservice.util.JwtUtil;
@@ -27,6 +28,8 @@ public class OauthController {
     @Autowired
     IGoogleService googleService;
 
+    @Autowired
+    UserService userService;
     private static final String jwtTokenCookieName = "JWT-TOKEN";
 
     @Value("${Domain}")
@@ -52,6 +55,7 @@ public class OauthController {
         RedirectView redirectview = new RedirectView();
         try {
             System.out.println("USER:: " + user.toString());
+            userService.saveUser(user);
         } catch (Exception exception) {
             System.out.println("In google method " + LocalDateTime.now() + " " + exception.getMessage());
         }

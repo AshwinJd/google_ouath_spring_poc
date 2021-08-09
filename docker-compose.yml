@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  discoveryservice:
+    build:
+      context: ./discoveryservice
+      dockerfile: Dockerfile
+    image: discoveryservice:latest
+    restart: always
+    expose: 
+      - 9091
+    ports:
+      - 9091:9091
+
+  userservice:
+    build:
+      context: ./userservice
+      dockerfile: Dockerfile
+    volumes:
+      - ./scripts:/temp/scripts
+    image: userservice:latest
+    restart: always
+    expose: 
+      - 8086
+    ports:
+      - 8086:8086
+    depends_on: 
+      - discoveryservice
+    entrypoint:
+      - /temp/scripts/wait-for-service.sh
+      - "java -jar /usr/src/userservice.jar"
+
+  mongo:
+    image: mongo:3.6
+    # network_mode: host
+    restart: always
+    volumes:
+      - "./MongoData:/data/db"
+    environment:
+      MONGO_INITDB_DATABASE: "sampleDB"
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+    ports:
+      - "27017:27017"
